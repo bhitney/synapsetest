@@ -1,0 +1,20 @@
+{
+	"name": "DestinationDataset_pn6",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "movies",
+				"fileSystem": "data"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

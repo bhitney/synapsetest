@@ -1,0 +1,61 @@
+{
+	"name": "Notebook 1",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "sparkpool1",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2
+		},
+		"metadata": {
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/44789714-4f98-436e-bdf6-b2a6014a0fae/resourceGroups/mdw_openhack_rg/providers/Microsoft.Synapse/workspaces/openhacksynapse/bigDataPools/sparkpool1",
+				"name": "sparkpool1",
+				"type": "Spark",
+				"endpoint": "https://openhacksynapse.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpool1",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 3,
+				"cores": 4,
+				"memory": 28
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"from pyspark.sql import SparkSession\n",
+					"from pyspark.sql.types import *\n",
+					"account_name = \"mdwohstorage\"\n",
+					"container_name = \"ingest\"\n",
+					"relative_path = \"FourthCoffee\"\n",
+					"adls_path = 'abfss://%s@%s.dfs.core.windows.net/%s' % (container_name, account_name, relative_path)\n",
+					"\n",
+					"spark.conf.set(\"fs.azure.account.auth.type.%s.dfs.core.windows.net\" %account_name, \"SharedKey\")\n",
+					"spark.conf.set(\"fs.azure.account.key.%s.dfs.core.windows.net\" %account_name ,\"wBfMysLe66697eGwWluZpRuNxIt8bjVhVa/794/03h+1LoEMfuvVDgsbNTJIlstSeLNumBY8hexq2PndX/BrUg==\")\n",
+					"\n",
+					"df1 = spark.read.option('header', 'true') \\\n",
+					"                .option('delimiter', ',') \\\n",
+					"                .csv(adls_path + '/Actors.csv')\n",
+					"\n",
+					"df1.show()"
+				],
+				"execution_count": 8
+			}
+		]
+	}
+}

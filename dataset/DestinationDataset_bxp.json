@@ -1,0 +1,20 @@
+{
+	"name": "DestinationDataset_bxp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "movies3",
+				"fileSystem": "data"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}
